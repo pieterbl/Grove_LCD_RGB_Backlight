@@ -59,7 +59,6 @@ rgb_lcd::rgb_lcd()
 
 void rgb_lcd::begin(uint8_t cols, uint8_t lines, uint8_t dotsize) 
 {
-
     Wire.begin();
     
     if (lines > 1) {
@@ -93,7 +92,6 @@ void rgb_lcd::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
     // third go
     command(LCD_FUNCTIONSET | _displayfunction);
 
-
     // finally, set # lines, font size, etc.
     command(LCD_FUNCTIONSET | _displayfunction);
 
@@ -119,7 +117,6 @@ void rgb_lcd::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
     setReg(REG_MODE2, 0x20);
     
     setColorWhite();
-
 }
 
 /********** high level commands, for the user! */
@@ -137,12 +134,10 @@ void rgb_lcd::home()
 
 void rgb_lcd::setCursor(uint8_t col, uint8_t row)
 {
-
     col = (row == 0 ? col|0x80 : col|0xc0);
     unsigned char dta[2] = {0x80, col};
 
     i2c_send_byteS(dta, 2);
-
 }
 
 // Turn the display on/off (quickly)
@@ -175,6 +170,7 @@ void rgb_lcd::noBlink()
     _displaycontrol &= ~LCD_BLINKON;
     command(LCD_DISPLAYCONTROL | _displaycontrol);
 }
+
 void rgb_lcd::blink()
 {
     _displaycontrol |= LCD_BLINKON;
@@ -186,6 +182,7 @@ void rgb_lcd::scrollDisplayLeft(void)
 {
     command(LCD_CURSORSHIFT | LCD_DISPLAYMOVE | LCD_MOVELEFT);
 }
+
 void rgb_lcd::scrollDisplayRight(void)
 {
     command(LCD_CURSORSHIFT | LCD_DISPLAYMOVE | LCD_MOVERIGHT);
@@ -223,10 +220,8 @@ void rgb_lcd::noAutoscroll(void)
 // with custom characters
 void rgb_lcd::createChar(uint8_t location, uint8_t charmap[])
 {
-
     location &= 0x7; // we only have 8 locations 0-7
     command(LCD_SETCGRAMADDR | (location << 3));
-    
     
     unsigned char dta[9];
     dta[0] = 0x40;

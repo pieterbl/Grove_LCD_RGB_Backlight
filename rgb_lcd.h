@@ -98,6 +98,9 @@ class rgb_lcd : public Print
 public:
   rgb_lcd();
 
+  virtual ~rgb_lcd() {
+  }
+
   void begin(uint8_t cols, uint8_t rows, uint8_t charsize = LCD_5x8DOTS);
 
   void clear();
@@ -143,8 +146,6 @@ private:
   uint8_t _displayfunction;
   uint8_t _displaycontrol;
   uint8_t _displaymode;
-
-  uint8_t _initialized;
 
   uint8_t _numlines,_currline;
 };
