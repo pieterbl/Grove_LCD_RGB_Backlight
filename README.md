@@ -11,9 +11,9 @@ Done with the tedious mono color backlight? This Grove - LCD RBG Backlight enabl
 
 ## Usage:
 
-This is an Arudino Library. It include a .h file, a .cpp file and some examples. Through these examples, you can quickly master the use of Grove - LCD RGB Backlight.
+This is an Arudino Library. It includes a .h file, a .cpp file and some examples. Through these examples, you can quickly master the use of Grove - LCD RGB Backlight.
 
-The in the following, we will introduce some functions which are used very intuitively. 
+In the following, we will introduce some functions which are used very intuitively. 
 
 
 ### Initialization
@@ -57,7 +57,7 @@ You can clear the display by this function:
     void blinkLED();
 
 
-For more information, please refer to [wiki page](http://wiki.seeedstudio.com/Grove-LCD_RGB_Backlight/).
+For more information, please refer to this [wiki page](http://wiki.seeedstudio.com/Grove-LCD_RGB_Backlight/).
 
     
 ----

@@ -53,7 +53,14 @@ void i2c_send_byteS(unsigned char *dta, unsigned char len)
     Wire.endTransmission();                     // stop transmitting
 }
 
-rgb_lcd::rgb_lcd()
+// defines are only valid until end of .cpp file
+#define DEFAULT_CURR_LINE          (0)
+
+rgb_lcd::rgb_lcd():
+                    // initialization order must match declaration order
+                    _displayfunction(LCD_1LINE),
+                    _numlines(1),
+                    _currline(DEFAULT_CURR_LINE)
 {
 }
 
@@ -65,7 +72,7 @@ void rgb_lcd::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
         _displayfunction |= LCD_2LINE;
     }
     _numlines = lines;
-    _currline = 0;
+    _currline = DEFAULT_CURR_LINE;
 
     // for some 1 line displays you can select a 10 pixel high font
     if ((dotsize != 0) && (lines == 1)) {

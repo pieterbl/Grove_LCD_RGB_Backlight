@@ -147,7 +147,8 @@ private:
   uint8_t _displaycontrol;
   uint8_t _displaymode;
 
-  uint8_t _numlines,_currline;
+  uint8_t _numlines;
+  uint8_t _currline;
 };
 
 #endif
