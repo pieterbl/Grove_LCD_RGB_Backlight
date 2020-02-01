@@ -56,9 +56,17 @@ void i2c_send_byteS(unsigned char *dta, unsigned char len)
 // defines are only valid until end of .cpp file
 #define DEFAULT_CURR_LINE          (0)
 
+// turn the display on with no cursor or blinking default
+#define DEFAULT_DISPLAY_CONTROL    (LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF)
+
+// Initialize to default text direction (for romance languages)
+#define DEFAULT_DISPLAY_MODE       (LCD_ENTRYLEFT | LCD_ENTRYSHIFTDECREMENT)
+
 rgb_lcd::rgb_lcd():
                     // initialization order must match declaration order
                     _displayfunction(LCD_1LINE),
+                    _displaycontrol(DEFAULT_DISPLAY_CONTROL),
+                    _displaymode(DEFAULT_DISPLAY_MODE),
                     _numlines(1),
                     _currline(DEFAULT_CURR_LINE)
 {
@@ -103,14 +111,14 @@ void rgb_lcd::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
     command(LCD_FUNCTIONSET | _displayfunction);
 
     // turn the display on with no cursor or blinking default
-    _displaycontrol = LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF;
+    _displaycontrol = DEFAULT_DISPLAY_CONTROL;
     display();
 
     // clear it off
     clear();
 
     // Initialize to default text direction (for romance languages)
-    _displaymode = LCD_ENTRYLEFT | LCD_ENTRYSHIFTDECREMENT;
+    _displaymode = DEFAULT_DISPLAY_MODE;
     // set the entry mode
     command(LCD_ENTRYMODESET | _displaymode);
     
@@ -266,10 +274,9 @@ inline void rgb_lcd::command(uint8_t value)
 // send data
 inline size_t rgb_lcd::write(uint8_t value)
 {
-
     unsigned char dta[2] = {0x40, value};
     i2c_send_byteS(dta, 2);
-    return 1; // assume sucess
+    return 1; // assume success
 }
 
 void rgb_lcd::setReg(unsigned char addr, unsigned char dta)
@@ -297,6 +304,8 @@ const unsigned char color_define[4][3] =
 
 void rgb_lcd::setColor(unsigned char color)
 {
-    if(color > 3)return ;
+    if(color > 3) {
+        return ;
+    }
     setRGB(color_define[color][0], color_define[color][1], color_define[color][2]);
 }
