@@ -35,10 +35,9 @@
 #include <inttypes.h>
 #include "Print.h"
 
-// Device I2C Arress
+// Device I2C Address
 #define LCD_ADDRESS     (0x7c>>1)
 #define RGB_ADDRESS     (0xc4>>1)
-
 
 // color define 
 #define WHITE           0
@@ -94,7 +93,6 @@
 
 class rgb_lcd : public Print 
 {
-
 public:
   rgb_lcd();
 
